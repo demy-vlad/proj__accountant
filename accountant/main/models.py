@@ -5,6 +5,7 @@ from django.db import models
 class ParserConfig(models.Model):
     title = models.CharField("Короткий опис", max_length=250)
     url = models.URLField("Посилання")
+    flag = models.BooleanField("Перша перевірка", default=False)
 
     class Meta:
         verbose_name = "Налаштування"
