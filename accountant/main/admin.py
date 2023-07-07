@@ -6,6 +6,7 @@ from .models import ParserConfig, ParserResult, TelegramConfig
 # Define the admin class
 class ParserResultAdmin(admin.ModelAdmin):
     list_display = ('url', 'time', 'date')
+    list_filter = ['date']
 
 admin.site.register(ParserConfig)
 admin.site.register(ParserResult, ParserResultAdmin)
