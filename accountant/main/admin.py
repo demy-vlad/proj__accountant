@@ -1,13 +1,14 @@
 from django.contrib import admin
 from .models import ParserConfig, ParserResult, TelegramConfig
-from .forms import ParserConfigRadioSelect
+from .forms import ParserConfigRadioSelect, ParserResultRadioSelect
 
 # Register your models here.
 
 # Define the admin class
 class ParserResultAdmin(admin.ModelAdmin):
-    list_display = ('url', 'time', 'date')
-    list_filter = ['date']
+    list_display = ('url', 'time', 'date', 'flag')
+    list_filter = ['date', 'flag']
+    form = ParserResultRadioSelect
 
 class ParserConfigAdmin(admin.ModelAdmin):
     list_display = ('title', 'flag')

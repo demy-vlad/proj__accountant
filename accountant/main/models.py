@@ -18,6 +18,7 @@ class ParserResult(models.Model):
     date = models.DateField("Дата додавання")
     time = models.TimeField("Час додавання")
     url = models.URLField("Посилання")
+    flag = models.BooleanField("Відправлено в чат", default=False)
 
     class Meta:
         verbose_name = "Результат пошуку"
