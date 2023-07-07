@@ -1,20 +1,30 @@
+import sqlite3
+from loguru import logger
 import requests
-import os
 
-def webhook_token() -> str:
-    '''Use it to create new bot accounts and manage your existing bots.'''   
-    # TOKEN = f"{os.getenv('TELEGRAM_BOT_TOKEN')}"
-    TOKEN = "5492169980:AAGwRVcGhhHjue19Yxu2dRijlSyQjS31_ds"
-    return TOKEN
-
-
-def get_chat_id() -> list:
-    '''Username of project participants'''
-    chat_ids = ['717438486']
-    return chat_ids
+def read_from_telegramconfig():
+    try:
+        # Connect to the database
+        conn = sqlite3.connect('accountant\db.sqlite3')
+        # Create a cursor object to execute SQL queries
+        cursor = conn.cursor()
+        # Execute a SELECT query to retrieve data from a table
+        cursor.execute('SELECT * FROM main_telegramconfig')
+        # Retrieve the results as a list of tuples
+        results = cursor.fetchall()
+        # Close the database connection
+        conn.close()
+        # Return the results
+        return results
+        
+    except sqlite3.Error as error:
+        logger.error(f"Error while connecting to or reading from database: {error}")
 
 
 def send_message_bot(message):
     '''Sending messages project participants'''
-    for chat_id in get_chat_id():
-        requests.get('https://api.telegram.org/bot{}/sendMessage'.format(webhook_token()), params=dict(chat_id= chat_id,text=message, parse_mode= "HTML"))
+    telegramconfig = read_from_telegramconfig()
+    TOKEN = telegramconfig[0][2]
+    chat_id = telegramconfig[0][1]
+    requests.get('https://api.telegram.org/bot{}/sendMessage'.format(TOKEN), 
+                params=dict(chat_id= chat_id,text=message, parse_mode= "HTML"))
