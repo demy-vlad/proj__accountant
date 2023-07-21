@@ -5,7 +5,7 @@ import requests
 def read_from_telegramconfig():
     try:
         # Connect to the database
-        conn = sqlite3.connect('accountant\db.sqlite3')
+        conn = sqlite3.connect('db.sqlite3')
         # Create a cursor object to execute SQL queries
         cursor = conn.cursor()
         # Execute a SELECT query to retrieve data from a table

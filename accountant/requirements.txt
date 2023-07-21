@@ -1,0 +1,15 @@
+loguru==0.7.0
+db-sqlite3==0.0.1
+redis==3.5.3
+requests==2.31.0
+free-proxy-list==0.0.3
+random-user-agent==1.0.1
+lxml==4.8.0
+openpyxl==3.0.10
+asyncio==3.4.3
+beautifulsoup4==4.12.2
+soupsieve==2.4.1
+django==3.2.5
+celery==5.1.2
+django-celery-beat==2.2.0
+selenium==3.141.0

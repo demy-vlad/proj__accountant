@@ -12,8 +12,30 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+# Настройки Celery beat
+CELERY_BEAT_SCHEDULE = {
+    'run_web_scraping_app': {
+        'task': 'main.tasks.run_web_scraping_app',
+        'schedule': 3600.0,  # Интервал в секундах (60 минута)
+    },
+    'run_senging_results': {
+        'task': 'main.tasks.run_senging_results',
+        'schedule': 120.0,  # Интервал в секундах (30 минута)
+    },
+}
+
+# Настройки логирования
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
 
 
@@ -32,6 +54,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_celery_beat',
     'main',
     'django.contrib.admin',
     'django.contrib.auth',

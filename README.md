@@ -16,6 +16,15 @@ pip install -r requirements.txt
 
 ## Usage
 ```bash
+# Это пересоберет и перезапустит контейнеры с обновленными настройками для Redis
+docker-compose down --volumes
+docker-compose build --no-cache
+docker-compose up --detach
+
+```
+
+## Usage
+```bash
 # ======================venv========================
 venv\Scripts\Activate.ps1
 # activate on Windows (PowerShell)

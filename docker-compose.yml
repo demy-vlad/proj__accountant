@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  django_app:
+    build:
+      context: ./accountant
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - ./accountant/db.sqlite3:/app/db.sqlite3
+
+  celery_beat:
+    build:
+      context: ./accountant
+      dockerfile: Dockerfile
+    command: celery -A accountant beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --loglevel=info
+    restart: always
+    volumes:
+      - ./accountant/db.sqlite3:/app/db.sqlite3
+    depends_on:
+      - redis
+
+  celery_worker:
+    build:
+      context: ./accountant
+      dockerfile: Dockerfile
+    command: celery -A accountant worker --loglevel=info
+    restart: always
+    volumes:
+      - ./accountant/db.sqlite3:/app/db.sqlite3
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    restart: always

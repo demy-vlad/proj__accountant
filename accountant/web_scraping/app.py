@@ -1,5 +1,6 @@
-from accountant.main.web_scraping.connect_to_database import read_from_main_parserconfig, update_to_database_parserconfig
-from accountant.main.web_scraping.work_ua.main import get_requests_html_text
+
+from .work_ua_main import get_requests_html_text
+from .connect_to_database import *
 from .find_duplicates import *
 
 

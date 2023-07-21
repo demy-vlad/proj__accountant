@@ -15,6 +15,7 @@ class ParserConfig(models.Model):
         return self.title
 
 class ParserResult(models.Model):
+    """ParserResult"""
     date = models.DateField("Дата додавання")
     time = models.TimeField("Час додавання")
     url = models.URLField("Посилання")

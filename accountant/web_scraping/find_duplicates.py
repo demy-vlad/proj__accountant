@@ -1,7 +1,7 @@
 from loguru import logger
-from accountant.main.web_scraping.config import get_current_date, get_formatted_time
-from accountant.main.web_scraping.connect_to_database import add_to_database
-from accountant.main.web_scraping.connect_to_database import read_from_main_parserresult
+from web_scraping.config import get_current_date, get_formatted_time
+from web_scraping.connect_to_database import add_to_database
+from web_scraping.connect_to_database import read_from_main_parserresult
 
 
 def find_duplicates(search_url ,arr_urls=None):
